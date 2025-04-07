@@ -1,6 +1,7 @@
 "use client"
 
 import {useState} from "react";
+import {useWorkoutsContext} from "@/hooks/useWorkoutsContext";
 
 export default function WorkoutForm() {
 
@@ -9,6 +10,8 @@ export default function WorkoutForm() {
     const [reps, setReps] = useState(0)
     const [error, setError] = useState("")
     const [disableButton, setDisableButton] = useState(false)
+
+    const {dispatch} = useWorkoutsContext()
 
 
     const handleTitleChange = (e) => {
@@ -66,6 +69,8 @@ export default function WorkoutForm() {
                     setReps(0)
                     setLoad(0)
                     setError("")
+
+                    dispatch({type:'CREATE_WORKOUT',payload:json_response})
                 }
 
             }
