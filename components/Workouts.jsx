@@ -8,11 +8,11 @@ export default function Workouts(){
 
     useEffect(() => {
         const fetchWorkouts = async ()=>{
+
             const response = await fetch("http://localhost:4000/api/workouts");
             const json_response = await response.json();
-            console.log(json_response,"workouts are fetched")
+
             if (response.ok){
-                console.log(json_response,"workouts are fetched")
                 setWorkouts(json_response);
             }
 
