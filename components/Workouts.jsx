@@ -1,10 +1,12 @@
 "use client"
-import {useEffect, useState} from "react";
+
+import {useEffect } from "react";
 import WorkoutDetails from "@/components/WorkoutDetails";
+import {useWorkoutsContext} from "@/hooks/useWorkoutsContext";
 
 export default function Workouts(){
 
-    const [workouts, setWorkouts] = useState([]);
+    const {workouts,dispatch} = useWorkoutsContext()
 
     useEffect(() => {
         const fetchWorkouts = async ()=>{
@@ -13,7 +15,9 @@ export default function Workouts(){
             const json_response = await response.json();
 
             if (response.ok){
-                setWorkouts(json_response);
+                dispatch({
+                    type:'SET_WORKOUTS',
+                    payload:json_response});
             }
 
 
