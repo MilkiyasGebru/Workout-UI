@@ -22,7 +22,7 @@ export default function Workouts(){
     }, []);
 
     return (
-        <div className="container bg-[#f1f1f1] min-h-[90vh] p-4">
+        <div className="w-3/5">
             <div className="flex flex-col gap-3 items-center justify-end ">
                 {workouts && workouts.map((workout, index) => {
                     return (
