@@ -1,14 +1,21 @@
 "use client"
 
 import {useState} from "react";
+import {useSignup} from "@/hooks/useSignup";
+import Link from "next/link";
 
 export default function SignUpOrRegister ({name}){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmitForm = (e) => {
+    const {signUp, isLoading, error} = useSignup()
+
+
+    const handleSubmitForm = async (e) => {
         e.preventDefault();
-        console.log(email, password);
+
+        await signUp(email, password);
+        console.log("This is the error", error)
     }
 
     return (
@@ -27,8 +34,9 @@ export default function SignUpOrRegister ({name}){
                    className="border border-gray-200 outline-none px-3 py-2 rounded-md w-2/3"
                    value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-            <button className="px-3 py-2 rounded-md border border-gray-100 w-fit mt-4 bg-lime-200 text-gray-600 cursor-pointer" onClick={handleSubmitForm}>{name}</button>
-
+            <button disabled={isLoading} className="px-3 py-2 rounded-md border border-gray-100 w-fit mt-4 bg-lime-200 text-gray-600 cursor-pointer" onClick={handleSubmitForm}>{name}</button>
+            {error && <p className="py-4 text-red-300">{error}</p>}
+            <Link href={"/home"}>Home</Link>
         </form>
     )
 
